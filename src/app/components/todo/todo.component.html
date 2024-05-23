@@ -5,6 +5,8 @@
     <app-input class="w-full" (addTask)="addTask($event)"></app-input>
     <app-todo-item
       (deleteTask)="deleteTask($event)"
+      (editTask)="editTask($event)"
+      (changeDoneTodo)="changeDoneTodo($event)"
       *ngFor="let todo of tasks"
       [todo]="todo"
       class="w-full"
