@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-finance": {
+    "my-todo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/my-finance",
+            "outputPath": "dist/my-todo",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -85,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-finance:build:production"
+              "buildTarget": "my-todo:build:production"
             },
             "development": {
-              "buildTarget": "my-finance:build:development"
+              "buildTarget": "my-todo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +96,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "my-finance:build"
+            "buildTarget": "my-todo:build"
           }
         },
         "test": {
