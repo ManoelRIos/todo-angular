@@ -1,11 +1,13 @@
-<div class="mx-60 flex flex-col items-center justify-center gap-8">
-  <app-todo-card class="w-full" [tasks]="tasks"></app-todo-card>
+<div class="flex flex-col items-center">
+  <div class="w-[600px] max-w-full flex flex-col items-center justify-center gap-8">
+    <app-todo-card class="w-full" [tasks]="tasks"></app-todo-card>
 
-  <app-input class="w-full" (addTask)="addTask($event)"></app-input>
-  <app-todo-item
-    (deleteTask)="deleteTask($event)"
-    *ngFor="let todo of tasks"
-    [todo]="todo"
-    class="w-full"
-  ></app-todo-item>
+    <app-input class="w-full" (addTask)="addTask($event)"></app-input>
+    <app-todo-item
+      (deleteTask)="deleteTask($event)"
+      *ngFor="let todo of tasks"
+      [todo]="todo"
+      class="w-full"
+    ></app-todo-item>
+  </div>
 </div>
