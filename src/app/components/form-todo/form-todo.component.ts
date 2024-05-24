@@ -6,10 +6,10 @@ import { Todo } from '../../models/todo';
   selector: 'app-input',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  templateUrl: './form-todo.component.html',
+  styleUrl: './form-todo.component.scss',
 })
-export class InputComponent {
+export class FormTodoComponent {
   task: string = '';
 
   @Output() addTask = new EventEmitter<string>();

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectorRef,
+  SimpleChanges,
+} from '@angular/core';
 import { Todo } from '../../models/todo';
 
 @Component({
@@ -10,9 +17,22 @@ import { Todo } from '../../models/todo';
 })
 export class TodoCardComponent {
   @Input() tasks: Todo[] = [];
+  @Input() totalDoneTasks: number = 0;
 
-  totalDoneTasks: number = this.tasks.filter((task) => task.done == true)
-    .length;
-  totalUndoneTasks: number = this.tasks.filter((task) => task.done == true)
-    .length;
+  constructor(private cdRef: ChangeDetectorRef) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.tasks);
+    if (changes['tasks']) {
+      this.cdRef.detectChanges(); // Trigger change detection for child component
+    }
+  }
+
+  ngOnInit(): void {
+    const localTasks = localStorage.getItem('tasks');
+    if (localTasks) {
+      this.tasks = JSON.parse(localTasks);
+      this.totalDoneTasks = this.tasks.filter((task) => task.done).length;
+    }
+  }
 }

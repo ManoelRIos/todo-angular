@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InputComponent } from '../input/input.component';
+import { FormTodoComponent } from '../form-todo/form-todo.component';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 import { NgFor, NgIf } from '@angular/common';
 import { Todo } from '../../models/todo';
@@ -10,11 +10,19 @@ import { TodoCardComponent } from '../todo-card/todo-card.component';
   standalone: true,
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
-  imports: [NgFor, NgIf, InputComponent, TodoItemComponent, TodoCardComponent],
+  imports: [
+    NgFor,
+    NgIf,
+    FormTodoComponent,
+    TodoItemComponent,
+    TodoCardComponent,
+  ],
 })
 export class TodoComponent {
   tasks: Todo[] = [];
+  tasksDone: number = this.tasks.filter((task) => task.done).length;
 
+  @Output() tasksToCardInfo: Todo[] = this.tasks;
   @Input() onAddTask?: EventEmitter<Todo>;
   @Input() onDeleteTask?: EventEmitter<number>;
 
@@ -35,7 +43,6 @@ export class TodoComponent {
   }
 
   editTask(todo: Todo) {
-    console.log(todo);
     const index = this.tasks.findIndex((task) => task.id === todo.id);
     if (index !== -1) {
       this.tasks[index].task = todo.task;
@@ -49,12 +56,11 @@ export class TodoComponent {
   }
 
   changeDoneTodo(todo: Todo) {
-    debugger
-    console.log(todo);
     const index = this.tasks.findIndex((task) => task.id === todo.id);
     if (index !== -1) {
       this.tasks[index].done = !todo.done;
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.tasksDone = this.tasks.filter((task) => task.done).length;
     }
   }
 }
